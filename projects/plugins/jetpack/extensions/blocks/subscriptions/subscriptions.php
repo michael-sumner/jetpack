@@ -818,7 +818,7 @@ function get_locked_content_placeholder_text( $newsletter_access_level ) {
 		: esc_html__( 'This post is for subscribers', 'jetpack' );
 
 	// translators: %s is the name of the site.
-	$subscribe_text = sprintf( esc_html__( 'Subscribe to "%s" to keep reading and get access to the full archive.', 'jetpack' ), get_bloginfo( 'name' ) );
+	$subscribe_text = sprintf( esc_html__( 'Subscribe to %s to keep reading and get access to the full archive.', 'jetpack' ), get_bloginfo( 'name' ) );
 
 	$lock_svg = plugins_url( 'extensions/blocks/subscriptions/lock.svg', JETPACK__PLUGIN_FILE );
 
