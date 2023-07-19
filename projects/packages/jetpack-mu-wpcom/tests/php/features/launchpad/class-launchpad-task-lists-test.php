@@ -187,7 +187,7 @@ class Launchpad_Task_Lists_Test extends \WorDBless\BaseTestCase {
 			'id'                             => 'task_0',
 			'title'                          => 'task_0',
 			'minimum_repetition_to_complete' => 2,
-			'repetition_count_callback'      => function ( $task ) {
+			'repetition_count_callback'      => function () {
 				return 1;
 			},
 		);
@@ -210,7 +210,7 @@ class Launchpad_Task_Lists_Test extends \WorDBless\BaseTestCase {
 				'id'                             => 'task-0',
 				'title'                          => 'Task 0',
 				'minimum_repetition_to_complete' => 2,
-				'repetition_count_callback'      => function ( $task ) {
+				'repetition_count_callback'      => function () {
 					return 1;
 				},
 			)
