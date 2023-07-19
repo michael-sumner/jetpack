@@ -179,38 +179,38 @@ class Launchpad_Task_Lists_Test extends \WorDBless\BaseTestCase {
 	}
 
 	/**
-	 * Test the validation of the repetition props. Both properties(minimum_repetition_to_complete & repetition_count_callback)
+	 * Test the validation of the repetition props. Both properties(target_repetitions & repetition_count_callback)
 	 * must be set if one is set.
 	 */
 	public function test_repetition_counting_task_definition() {
 		$valid_task_list = array(
-			'id'                             => 'task_0',
-			'title'                          => 'task_0',
-			'minimum_repetition_to_complete' => 2,
-			'repetition_count_callback'      => function () {
+			'id'                        => 'task_0',
+			'title'                     => 'task_0',
+			'target_repetitions'        => 2,
+			'repetition_count_callback' => function () {
 				return 1;
 			},
 		);
 		$this->assertTrue( Launchpad_Task_Lists::validate_task( $valid_task_list ) );
 
 		$valid_task_list = array(
-			'id'                             => 'task_0',
-			'title'                          => 'task_0',
-			'minimum_repetition_to_complete' => 2,
+			'id'                 => 'task_0',
+			'title'              => 'task_0',
+			'target_repetitions' => 2,
 		);
 		$this->assertFalse( Launchpad_Task_Lists::validate_task( $valid_task_list ) );
 	}
 
 	/**
-	 * Test the values for minimum_repetition_to_complete and repetition_count_callback.
+	 * Test the values for target_repetitions and repetition_count_callback.
 	 */
 	public function test_repetition_counting_task_list() {
 		wpcom_register_launchpad_task(
 			array(
-				'id'                             => 'task-0',
-				'title'                          => 'Task 0',
-				'minimum_repetition_to_complete' => 2,
-				'repetition_count_callback'      => function () {
+				'id'                        => 'task-0',
+				'title'                     => 'Task 0',
+				'target_repetitions'        => 2,
+				'repetition_count_callback' => function () {
 					return 1;
 				},
 			)
@@ -235,6 +235,6 @@ class Launchpad_Task_Lists_Test extends \WorDBless\BaseTestCase {
 		$first_task = wpcom_get_launchpad_checklist_by_checklist_slug( 'task-list-test' )[0];
 
 		$this->assertSame( 1, $first_task['repetition_count'] );
-		$this->assertEquals( 2, $first_task['minimum_repetition'] );
+		$this->assertEquals( 2, $first_task['target_repetitions'] );
 	}
 }

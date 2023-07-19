@@ -292,9 +292,14 @@ class Launchpad_Task_Lists {
 		$built_task['badge_text']   = $this->load_value_from_callback( $task, 'badge_text_callback' );
 		$built_task['isLaunchTask'] = isset( $task['isLaunchTask'] ) ? $task['isLaunchTask'] : false;
 
-		$repetition_count                 = $this->load_repetition_count( $task );
-		$built_task['repetition_count']   = $repetition_count ? $repetition_count : null;
-		$built_task['minimum_repetition'] = isset( $task['minimum_repetition_to_complete'] ) ? $task['minimum_repetition_to_complete'] : null;
+		if ( isset( $task['target_repetitions'] ) ) {
+			$built_task['target_repetitions'] = $task['target_repetitions'];
+			$repetition_count                 = $this->load_repetition_count( $task );
+			$built_task['repetition_count']   = $repetition_count;
+		} else {
+			$built_task['target_repetitions'] = null;
+			$built_task['repetition_count']   = null;
+		}
 
 		return $built_task;
 	}
@@ -604,10 +609,10 @@ class Launchpad_Task_Lists {
 			return false;
 		}
 
-		$has_both_properties_for_counting = ( isset( $task['minimum_repetition_to_complete'] ) || isset( $task['repetition_count_callback'] ) ) && ! ( isset( $task['minimum_repetition_to_complete'] ) && isset( $task['repetition_count_callback'] ) );
+		$missing_repepetition_property = ( isset( $task['target_repetitions'] ) || isset( $task['repetition_count_callback'] ) ) && ! ( isset( $task['target_repetitions'] ) && isset( $task['repetition_count_callback'] ) );
 
-		if ( $has_both_properties_for_counting ) {
-			_doing_it_wrong( 'validate_task', 'The Launchpad task being registered requires both a "minimum_repetition_to_complete" attribute and a "repetition_count_callback" callback', '6.3' );
+		if ( $missing_repepetition_property ) {
+			_doing_it_wrong( 'validate_task', 'The Launchpad task being registered requires both a "target_repetitions" attribute and a "repetition_count_callback" callback', '6.3' );
 			return false;
 		}
 
