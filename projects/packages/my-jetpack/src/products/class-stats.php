@@ -163,7 +163,7 @@ class Stats extends Module_Product {
 	public static function get_purchase_url() {
 		$blog_id                 = Jetpack_Options::get_option( 'id' );
 		$encoded_redirect_to_uri = rawurlencode( 'admin.php?page=stats&purchase_success=1' );
-		return sprintf( 'https://wordpress.com/stats/purchase/%d?redirect_to=%s', $blog_id, $encoded_redirect_to_uri );
+		return sprintf( 'https://wordpress.com/stats/purchase/%d?redirect_to=%s&from=jetpack', $blog_id, $encoded_redirect_to_uri );
 	}
 
 	/**
