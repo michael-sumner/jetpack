@@ -609,9 +609,9 @@ class Launchpad_Task_Lists {
 			return false;
 		}
 
-		$missing_repepetition_property = ( isset( $task['target_repetitions'] ) || isset( $task['repetition_count_callback'] ) ) && ! ( isset( $task['target_repetitions'] ) && isset( $task['repetition_count_callback'] ) );
+		$missing_repetition_property = ( isset( $task['target_repetitions'] ) || isset( $task['repetition_count_callback'] ) ) && ! ( isset( $task['target_repetitions'] ) && isset( $task['repetition_count_callback'] ) );
 
-		if ( $missing_repepetition_property ) {
+		if ( $missing_repetition_property ) {
 			_doing_it_wrong( 'validate_task', 'The Launchpad task being registered requires both a "target_repetitions" attribute and a "repetition_count_callback" callback', '6.3' );
 			return false;
 		}
